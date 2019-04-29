@@ -1,0 +1,486 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="EnlighterJS" content="Advanced javascript based syntax highlighting" data-indent="4" data-selector-block="pre" data-selector-inline="code" data-language="javascript" />
+    <link rel="stylesheet" type="text/css" href="css/EnlighterJS.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Anton|Kanit|Oswald|PT+Sans|Ropa+Sans" rel="stylesheet">
+    <script type="text/javascript" src="js/lightbox.js"></script>
+    <!-- Include MooTools Framework -->
+    <script type="text/javascript" src="js/MooTools-More-1.6.0-compressed.js"></script>
+
+    <!-- Include EnlighterJS -->
+    <script type="text/javascript" src="js/EnlighterJS.min.js"></script>
+    <title>Control interface</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <div class="title">
+                <H1>Internet controlled robot</H1>
+                <h2>by Amalia Cowan</h2>
+            </div>
+            <img src="media/cover.jpg">
+
+        </header>
+        <p class="first"><img src="media/mbot.jpg" class="mbot"> The overall goal for this project was to create a robot that could control a basic robot. The Chasis and the motors that were used came from a <a href="http://learn.makeblock.com/en/mbot/" target="_blank">mBot Kit by Makeblock. </a>By using a tutorial from Hardware Fun on <a href="http://hardwarefun.com/tutorials/controlling-speed-of-dc-motors-using-arduino" target="_blank"> Controlling speed of DC motors using Arduino</a>, I was able to understand how to change the direction of the motors. Once this was done, I was able to establish what values the pins should be set at so that the motors would be controlled separately and both turn in the desired direction, because if they were set to both turn left at the same time, one wheel would be turning forward, and one back, and the robot wouldn't move forward, as this was the first goal.</p>
+
+        <p><img src="media/dcmotor.jpg" class="left">While being able to control the speed and direction of the DC motors was in the right direction, there was no way to control when the motors stopped or when they started. So the next step was adding a push button so that when the button was pressed, the motors would begin, and when the push button was released, they would stop. With the help of a <a href=" http://tharidarattanajaturonarch1392-2013.blogspot.com/2013/05/week-11-progress-on-arduino.html" target="_blank">tutorial</a> from a blog that tracked a student's project, I was able to implement a push button and add to the code so that when the button was pressed, the motors would work and when released, the motors stopped. Once this was working, I added 3 more buttons, along with adding code, so that when the different buttons were pressed, the motors would begin turning in different directions according to the button that was pressed and held down. The 4 buttons caused the motors to go forward, backwards, and also the left motor would work own it's own when the 2nd or 3rd buttons were pressed, so the robot could turn left or right.</p>
+        <div class="motors">
+            <video controls="controls" style="width:100%" title="motors">
+            <source src="media/motors.mp4" type="video/mp4" />
+            <source src="media/motors.webm" type="video/webm" />
+            <source src="media/motors.ogv" type="video/ogg" />
+        </video>
+        </div>
+
+
+        <p><img src="media/remote.png" class="interface">Now that the motors were running with pushbuttons, the next step was to remove the buttons and instead control the motors through buttons on a web interface. I found examples on how to go about doing so on Adafruit such as <a href="https://learn.adafruit.com/build-an-esp8266-mobile-robot?view=all" target="_blank">Build an ESP8266 Mobile Robot</a> and <a href="https://learn.adafruit.com/wifi-controlled-mobile-robot?view=all#connections" target="_blank">WiFi Controlled Mobile Robot</a>. By using those examples and a couple more, I was able to understand how to move from the pushbutton switches to using a <a href="http://acowancreations.com/iotremote" target="_blank">web interface</a>. For the time being, only one button would be used, as the first step was to make sure that the Robot can receive the information and start the motors. I did this by using the jQuery events <code>mouseup</code> and <code>mousdown</code>. Having the motors move when the <code>mousedown</code> event was called and then stop when the <code>mouseup</code> event was called. The data was sent to the text file when the mouse was down and then again when the mouse was up. I then changed the HTML and JS file so that there would be multiple controls on the interface and changed the JS file to use the <code>click</code> event, as this allowed, as that then allowed me to be able to continue to control the robot without having it stop between actions, and would only stop when I pressed the stop button of the interface. </p>
+        <p></p>
+        <p></p>
+        <div class="motors">
+            <video controls="controls" style="width:100%" title="motors">
+                <source src="media/sample.mp4" type="video/mp4" />
+                <source src="media/sample.webm" type="video/webm" />
+                <source src="media/sample.ogv" type="video/ogg" />
+         </video>
+        </div>
+
+        <br>
+
+
+        <h2>Code</h2>
+
+ <pre data-enlighter-language="html" data-enlighter-group="group0001" data-enlighter-title="HTML">
+         <!DOCTYPE html>
+        <html>
+
+        <head>
+
+
+    <title>Robot Control</title>
+    <link rel="stylesheet" type="text/css" href="css/interface.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="apptest.js"></script>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="title">Robot Control</div>
+        <div class="remote">
+            <div class="border">
+                <div class="buttonBlock">
+                    <button id="1" class="direction btn btn-block btn-primary skewUP" type="button">&#11014;</button>
+                </div>
+                <div class="buttonBlock">
+                    <button id="2" class="leftright btn btn-block btn-primary skewLeft" type="button"> &#11013; </button>
+                    <button id="3" class="leftright btn btn-block btn-primary skewRight" type="button"> &#10145; </button>
+                </div>
+                <div class="buttonBlock">
+                    <button id="4" class="direction btn btn-block btn-primary skewDown" type="button">&#11015;</button>
+                </div>
+                <div class="buttonBlock">
+                    <button id="5" class="red btn button-block">&#11203;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+        </html>
+        </pre>
+            <pre data-enlighter-language="html" data-enlighter-group="group0001" data-enlighter-title="CSS">button {
+    color: #000000;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button:hover {
+    text-decoration: none;
+    color: #555;
+}
+
+.direction {
+    width: 70px;
+    height: 50px;
+    margin: 15px 7px 5px 0px;
+    padding: auto;
+}
+
+.leftright {
+    margin: 7px 18px 0px 18px;
+    padding: auto;
+    width: 70px;
+    height: 50px;
+}
+
+body {
+    font-family: 'Open Sans';
+}
+
+.buttonBlock {
+    margin: 25px;
+}
+
+.btn-block {
+    white-space: normal;
+}
+
+.btn-primary {
+    color: #000000;
+    border-radius: 20%;
+    text-decoration: none;
+    text-align: center;
+    background-color: hsl(0, 0%, 75%);
+    text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
+    font-weight: bold;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 50px;
+    box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.075) 0 -0.05em .015em, hsl(0, 0%, 60%) 0 .1em 1px, hsl(0, 0%, 45%) 0 .1em 1px, rgba(0, 0, 0, 0.2) 0 .1em 5px;
+}
+
+.btn-primary:before {
+    font: 1.2em/0 'Pictos', sans-serif;
+    content: attr(data-icon);
+}
+
+.btn-primary:hover {
+    background-color: hsl(0, 0%, 83%);
+}
+
+.btn-primary:focus {
+    outline: none;
+    color: #000 !important;
+}
+
+.btn-primary:active {
+    background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: -moz-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0))), url(noise.png);
+    box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.2) 0 -0.1em .3em, rgba(0, 0, 0, 0.4) 0 .1em 1px !important;
+    -webkit-transform: translateY(.2em);
+    transform: translateY(.2em);
+}
+
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+.btn-primary.disabled,
+.btn-primary.disabled:hover {
+    opacity: .5;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.2) !important;
+    text-shadow: none !important;
+    background-color: rgba(0, 0, 0, 0.05);
+    background-image: none;
+    border-top: none;
+    box-shadow: inset rgba(255, 254, 255, 0.4) 0 0.3em .3em, inset rgba(0, 0, 0, 0.1) 0 -0.1em .3em, rgba(0, 0, 0, 0.3) 0 .1em 1px, rgba(0, 0, 0, 0.2) 0 .2em 6px;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+}
+
+.btn {
+    border: none;
+    font-weight: normal;
+    line-height: 1.4px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+
+.btn-primary.pink {
+    color: RGBA(204, 51, 0, 1);
+    text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
+    font-size: 90px;
+    box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.075) 0 -0.02em .075em, hsl(0, 0%, 60%) 0 .05em 1px, hsl(0, 0%, 45%) 0 .01em .5px, rgba(0, 0, 0, 0.2) 0 .1em 5px !important;
+}
+
+.btn-primary.pink:active {
+    color: RGBA(204, 51, 0, 1);
+    background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: -moz-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0))), url(noise.png);
+    box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.2) 0 0.02em .075em, rgba(0, 0, 0, 0.4) 0 .1em 1px !important;
+    -webkit-transform: translateY(.1em);
+    transform: translateY(.1em);
+}
+
+.btn-primary.pink:hover {
+    background-color: hsl(0, 0%, 83%);
+    color: RGBA(204, 51, 0, .95);
+}
+
+.btn-primary.pink:focus {
+    color: RGBA(204, 51, 0, 1) !important;
+}
+
+.btn-primary.pink[disabled],
+.btn-primary.pink[disabled]:hover,
+.btn-primary.pink.disabled,
+.btn-primary.pink.disabled:hover {
+    color: RGBA(204, 51, 0, 1) !important;
+}
+
+body {
+    font-size: 20px;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Audiowide', cursive;
+    font-size: 40px;
+    padding: 5px 0 10px 0;
+}
+
+.mainContainer {
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 10px solid black;
+    border-radius: 15px;
+}
+
+.remote {
+    width: 300px;
+    height: 500px;
+    background-color: #333;
+    border-radius: 10px 10px 20px 20px;
+    padding-top: 10px;
+    z-index: 100;
+    margin: auto auto 25px auto;
+}
+
+.remote .border {
+    height: 90%;
+    width: 90%;
+    margin: 15px auto;
+    box-shadow: inset 0px 0px 10px 1px rgba(13, 13, 13, 0.8);
+    position: relative;
+    padding-top: 5px;
+}
+
+.skewUP {
+    border-radius: 20px 20px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.skewDown {
+    border-radius: 2px 2px 20px 20px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.skewRight {
+    border-radius: 2px 20px 20px 2px;
+}
+
+.skewLeft {
+    border-radius: 20px 2px 2px 20px;
+}
+        </pre>
+            <pre data-enlighter-language="js" data-enlighter-group="group0001" data-enlighter-title="Javascript">
+    $(document).ready(function () {
+        $('#1').click(function() {
+            js2php("1");
+        });
+        $('#2').click(function() {
+          js2php("2");
+        });
+      $('#3').click(function() {
+          js2php("3");
+        });
+      $('#4').click(function() {
+          js2php("4");
+        });
+      $('#5').click(function() {
+          js2php("0");
+        });
+    });
+
+function js2php(qData) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "main.php?q=" + qData, true);
+    xmlhttp.send();
+    console.log(qData);
+}
+        </pre>
+            <pre data-enlighter-language="php" data-enlighter-group="group0001" data-enlighter-title="PHP">
+      <?php
+$q = $_REQUEST["q"];
+
+if ($q !== "") {
+    $dataFileObj = fopen("bot.txt", "w") or die("Unable to open file");
+    fwrite($dataFileObj, $q);
+    fclose($dataFileObj);
+  }
+?>
+        </pre>
+            <pre data-enlighter-language="java" data-enlighter-group="group0001" data-enlighter-title="Processing">
+import processing.serial.*;
+Serial ComPort;
+String input[];
+int last = 1;
+int current= 1;
+
+void setup() {
+  String portName = Serial.list()[1]; 
+  ComPort = new Serial(this, portName, 9600);
+  println(ComPort);
+  ComPort.bufferUntil('\n');
+}
+void draw() {
+  input = loadStrings("http://acowancreations.com/iotremote/bot.txt");
+  current = int(input[0]);
+  println(current);
+  if (current != last) {
+    println("current: " + current);
+    println("last: " + last);
+    println("- - -");
+    ComPort.write(current);
+    last = current;
+  }
+  //input = null;
+  delay(500);
+}
+        </pre>
+            <pre data-enlighter-language="c" data-enlighter-group="group0001" data-enlighter-title="Arduino">
+const int E1 = 10;
+const int E2 = 11;
+const int motor1pin1 = 8;
+const int motor1pin2 = 9;
+const int motor2pin1 = 12;
+const int motor2pin2 = 13;
+
+int moveRobot = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("read");
+
+  pinMode(E1, OUTPUT);
+  pinMode(E2, OUTPUT);
+  pinMode(motor1pin1, OUTPUT);
+  pinMode(motor1pin2, OUTPUT);
+  pinMode(motor2pin1, OUTPUT);
+  pinMode(motor2pin2, OUTPUT);
+  digitalWrite(switchState, moveRobot);
+}
+
+void loop() {
+  if (Serial.available()) {
+    int moveRobot = Serial.read();
+
+    if (moveRobot == 0) {
+      stopp();
+    }
+    else if (moveRobot == 1) {
+      forward();
+    }
+    else if (moveRobot == 2) {
+      left();
+    }
+    else if (moveRobot == 3) {
+      right();
+    }
+    else if (moveRobot == 4) {
+      back();
+    }
+  }
+}
+
+void forward() {
+
+  digitalWrite(E1, HIGH);
+  digitalWrite(E2, HIGH);
+
+  digitalWrite(motor1pin1, HIGH);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, HIGH);
+}
+
+void left() {
+
+  digitalWrite(E1, LOW);
+  digitalWrite(E2, HIGH);
+
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, HIGH);
+  digitalWrite(motor2pin2, LOW);
+}
+
+void right() {
+
+  digitalWrite(E1, LOW);
+  digitalWrite(E2, HIGH);
+
+  digitalWrite(motor1pin1, HIGH);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, HIGH);
+}
+
+
+void back() {
+
+  digitalWrite(E1, HIGH);
+  digitalWrite(E2, HIGH);
+
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, HIGH);
+  digitalWrite(motor2pin1, HIGH);
+  digitalWrite(motor2pin2, LOW);
+}
+
+void stopp() {
+
+  digitalWrite(E1, LOW);
+  digitalWrite(E2, LOW);
+
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, LOW);
+}
+        </pre>
+
+   
+
+        <p></p>
+        <h2>Next Steps</h2>
+        <p> </p>
+        <h><img src="media/esp01s.jpg" class="esp1s">Even though for the project we were only expected to be able to control the proeject through serial input through Processing, I decided to look into the process of using an ESP8266 Wifi module. I purchased through Amazon two different ESP8266 boards, the <a href="https://smile.amazon.com/gp/product/B01G6I2D40/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1">ESP8266 ESP-01S</a> and the <a href="https://smile.amazon.com/gp/product/B010O1G1ES/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1">NodeMCU LUA WiFi Internet ESP8266 Development Board (ESP8266 12E).</a> While the expectation of the project was to control the arduino through the internet or have the arduino control a web page<img src="media/espdev.jpg" class="right">After some more research, I have found a tutorial on <a href="https://www.instructables.com/id/Control-a-Zumo-Robot-Using-the-ESP8266/">how to wire a Zumo Robot</a> and I have changed my wiring appropriately so that the correct wires could be connected to the ESP8266 12E Development board. I hope to use this tutorials and others so that I can control the robot without needing the USB cord, as it limits the distance of how far the robot can go. </p>
+<h2>Schematics</h2>
+ <a href="#img1">
+  <img src="media/arduinoboard.png" class="wiring">
+</a>
+
+<!-- lightbox container hidden with CSS -->
+<a href="#_" class="lightbox" id="img1">
+  <img src="media/arduinoboard.png">
+</a>
+
+<!--        <p>WiFi Controlled Mobile Robot-Control your robot via WiFi using Arduino & the CC3000 WiFi chip: Build an ESP8266 Mobile Robot</p>-->
+<!--        <p> <a href="https://learn.adafruit.com/build-an-esp8266-mobile-robot?view=all#building-the-robot">Learn how to make a mobile robot that you can easily control via WiFi!-</a></p>-->
+<!--        <p>Control a Zumo Robot Using the ESP8266- https://www.instructables.com/id/Control-a-Zumo-Robot-Using-the-ESP8266/ </p>-->
+<!--        <p> <a href="https://www.hackster.io/andriy-baranov/from-bt-to-wifi-creating-wifi-controlled-arduino-robot-car-09b7c1">From BT to WiFi: Creating WiFi Controlled Arduino Robot Car: </a></p>-->
+<!--        <p> <a href="http://arduinobasics.blogspot.com/2012/05/reading-from-text-file-and-sending-to.html">Reading from a Text File and Sending to Arduino</a> </p>-->
+<!--        <p>How to Build an H-bridge Circuit to Control 2 Motors: http://www.learningaboutelectronics.com/Articles/2-motor-H-bridge-circuit.php</p>-->
+    </div>
+</body>
+
+</html>
