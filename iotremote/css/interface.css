@@ -1,0 +1,251 @@
+button {
+    color: #000000;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+button:hover {
+    text-decoration: none;
+    color: #555;
+    /*    background: #f5f5f5;*/
+}
+
+.direction {
+    width: 70px;
+    height: 50px;
+    margin: 15px/*top*/
+    7px/*right*/
+    5px/*bottom*/
+    0px;
+    padding: auto;
+}
+
+.leftright {
+    margin: 7px/*top-right*/
+    18px/*right-bottom*/
+    0px/*bottom-left*/
+    18px;
+    padding: auto;
+    width: 70px;
+    height: 50px;
+}
+
+body {
+    font-family: 'Open Sans';
+}
+
+.buttonBlock {
+    margin: 25px;
+}
+
+
+/*  background: url(http://notrealdomain2.com/newbanner.png) no-repeat;*/
+
+.btn-block {
+    white-space: normal;
+}
+
+
+.btn-primary {
+    color: #000000;
+    border-radius: 20%;
+    text-decoration: none;
+    text-align: center;
+    background-color: hsl(0, 0%, 75%);
+    text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
+    font-weight: bold;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 50px;
+    /* drop shadow */
+    box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.075) 0 -0.05em .015em, /* inner shadow */
+    hsl(0, 0%, 60%) 0 .1em 1px, hsl(0, 0%, 45%) 0 .1em 1px, /* color border */
+    rgba(0, 0, 0, 0.2) 0 .1em 5px;
+    
+    
+}
+
+.btn-primary:before {
+    font: 1.2em/0 'Pictos', sans-serif;
+    content: attr(data-icon);
+    /* gets the icon value from the custom data attribute and puts it infront of the button label */
+    /*          margin-right: 0.4em;*/
+}
+
+.btn-primary:hover {
+    background-color: hsl(0, 0%, 83%);
+}
+
+.btn-primary:focus {
+    outline: none;
+/*    color: rgba(254, 255, 255, 0.9) !important;*/
+/*        text-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px;*/
+    color: #000 !important;
+}
+
+.btn-primary:active {
+    background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: -moz-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0))), url(noise.png);
+    box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.2) 0 -0.1em .3em, rgba(0, 0, 0, 0.4) 0 .1em 1px !important;
+    -webkit-transform: translateY(.2em);
+    transform: translateY(.2em);
+    /*
+    color: black;
+    background-color: #48c9b0;
+    border-color: #48c9b0;
+*/
+}
+
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+.btn-primary.disabled,
+.btn-primary.disabled:hover {
+    opacity: .5;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.2) !important;
+    text-shadow: none !important;
+    background-color: rgba(0, 0, 0, 0.05);
+    background-image: none;
+    border-top: none;
+    box-shadow: inset rgba(255, 254, 255, 0.4) 0 0.3em .3em, inset rgba(0, 0, 0, 0.1) 0 -0.1em .3em, rgba(0, 0, 0, 0.3) 0 .1em 1px, rgba(0, 0, 0, 0.2) 0 .2em 6px;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+}
+
+.btn {
+    border: none;
+    font-weight: normal;
+    line-height: 1.4px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+
+.btn-primary.pink {
+    /*    color: hsl(340, 100%, 30%) !important;*/
+/*    background-color: hsl(340, 100%, 75%);*/
+    color: RGBA(204, 51,0,1);
+      text-shadow: rgba(255, 255, 255, .5) 0 1px 0;
+    /* drop shadow */
+    /* drop shadow */
+    font-size:90px;
+    box-shadow: inset rgba(255, 254, 255, 0.6) 0 0.3em .3em, 
+        inset rgba(0, 0, 0, 0.075) 0 -0.02em .075em, /* inner shadow */
+    hsl(0,0%, 60%) 0 .05em 1px, hsl(0, 0%, 45%) 0 .01em .5px, /* color border */
+    rgba(0, 0, 0, 0.2) 0 .1em 5px !important;
+ 
+
+}
+
+.btn-primary.pink:active {
+    color: RGBA(204, 51,0,1);
+    background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: -moz-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0)));
+    background-image: gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255, 255, 255, 0)), to( rgba(255, 255, 255, 0))), url(noise.png);
+    box-shadow: inset rgba(255, 255, 255, 0.6) 0 0.3em .3em, inset rgba(0, 0, 0, 0.2) 0 0.02em .075em, rgba(0, 0, 0, 0.4) 0 .1em 1px !important;
+    -webkit-transform: translateY(.1em);
+    transform: translateY(.1em);
+
+}
+
+.btn-primary.pink:hover {
+    background-color: hsl(0, 0%, 83%);
+        color: RGBA(204,51,0,.95);
+}
+
+.btn-primary.pink:focus {
+      color: RGBA(204, 51,0,1) !important;
+}
+
+
+
+.btn-primary.pink[disabled],
+.btn-primary.pink[disabled]:hover,
+.btn-primary.pink.disabled,
+.btn-primary.pink.disabled:hover {
+       color: RGBA(204, 51,0,1) !important;
+}
+
+/*---------- Glass + Transparent -------------- */
+
+
+/* -------------- Shapes -------------- */
+
+
+/* round */
+
+body {
+    font-size: 20px;
+}
+
+.title {
+    text-align: center;
+ font-family: 'Audiowide', cursive;
+
+/*font-family: 'Press Start 2P', cursive;*/
+    font-size: 40px;
+    padding: 5px 0 10px 0;
+}
+
+.mainContainer {
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 10px solid black;
+    border-radius: 15px;
+}
+
+.remote {
+    /*   position: ; */
+    /*    position: absolute;*/
+    /*    bottom: 10px;*/
+    /*    right: 100px;*/
+    width: 300px;
+    height: 500px;
+    background-color: #333;
+    border-radius: 10px 10px 20px 20px;
+    padding-top: 10px;
+    z-index: 100;
+/*    margin: auto;*/
+    margin: auto auto 25px auto;
+}
+
+.remote .border {
+    height: 90%;
+    width: 90%;
+    margin: 15px auto;
+    box-shadow: inset 0px 0px 10px 1px rgba(13, 13, 13, 0.8);
+    position: relative;
+    padding-top: 5px;
+}
+
+.skewUP {
+    border-radius: 20px 20px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.skewDown {
+    border-radius: 2px 2px 20px 20px;
+    margin-bottom: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.skewRight {
+    border-radius: 2px 20px 20px 2px;
+}
+
+.skewLeft {
+    border-radius: 20px 2px 2px 20px;
+}
